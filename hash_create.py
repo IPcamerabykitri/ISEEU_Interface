@@ -3,9 +3,13 @@ import sys
 import threading
 import time
 
+"""
+create SHA-1 hash value then store into hash_result.txt
+"""
+
 def hash():
 
-    f=open('nc.exe','rb')
+    f=open('filename','rb')
     data=f.read()
     f.close()
 
