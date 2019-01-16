@@ -1,4 +1,4 @@
-#Analysis 모듈을 모아놓은 python 파일.
+# Analysis Module
 
 def Packet_Analysis():
     print("DDOS_SCAN!")
