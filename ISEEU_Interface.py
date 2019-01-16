@@ -6,7 +6,7 @@ import ISEEU_Analyst
 #get args.
 def Get_arg():
     # action='store_true' use when option does not wants arguments
-    parser = argparse.ArgumentParser(description='Select Module')
+    parser = argparse.ArgumentParser(description='Select Module to IP_Camera_Scan or Scan-Result-File Analysis.')
     parent_group = parser.add_mutually_exclusive_group()
 
     parent_group.add_argument('-n','--Network', action='store_true', help="Start Network Module")
