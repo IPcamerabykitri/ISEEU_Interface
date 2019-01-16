@@ -134,7 +134,7 @@ grep -sRIEoh '(http|https)://[^/"]+' --exclude='console' $FIRMDIR | sort | uniq 
 
 grep -sRIEoh '([[:alnum:]_.-]+@[[:alnum:]_.-]+?\.[[:alpha:].]{2,6})' "$@" --exclude='console' $FIRMDIR | sort | uniq >> $FOLDER/emails
 
-"find $FIRMDIR -user root -perm -4000 1>>$FOLDER/SETUID 2> /dev/null"
+find $FIRMDIR -user root -perm -4000 1>>$FOLDER/SETUID 2> /dev/null
 
 #Perform static code analysis 
 #eslint -c eslintrc.json $FIRMDIR | tee -a $FILE
