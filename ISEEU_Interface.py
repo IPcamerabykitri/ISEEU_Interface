@@ -1,4 +1,3 @@
-import os
 import argparse
 import sys
 import ISEEU_Scanner
@@ -6,22 +5,37 @@ import ISEEU_Analyst
 
 #get args.
 def Get_arg():
-    parser = argparse.ArgumentParser(description='This code is written for practice about argparse')
-    parser.add_argument('', type=float,
-                        metavar='First_number',
-                        help='What is the first number?')
-    parser.add_argument('Y', type=float,
-                        metavar='Second_number',
-                        help='What is the second number?')
-    parser.add_argument('--op', type=str, default='add',
-                        choices=['add', 'sub', 'mul', 'div'],
-                        help='What operation?')
-    args = parser.parse_args()
+    # action='store_true' use when option does not wants arguments
+    parser = argparse.ArgumentParser(description='Select Module')
+    parent_group = parser.add_mutually_exclusive_group()
 
-#Interface의 핵심. 내부 실행 내용 담는다.
-def Interface_Execute():
+    parent_group.add_argument('-n','--Network', action='store_true', help="Start Network Module")
+    network_parse = parent_group.add_argument_group(title='Network options')
+    network_parse.add_argument('-s', '--SSH', type=str, help="test ssh by input ip")
+    network_parse.add_argument('-e','--Telnet',type=str, help="test telnet by input ip")
+    network_parse.add_argument('-t', '--HTTP', type=str, help="test http by input ip")
+    network_parse.add_argument('-p','--Packet',type=str, help="Sniff Packet of input network interface")
+
+    parent_group.add_argument('-f','--Firmware', type=str,metavar="rootfs_PATH" , help="Start Firmware Module")
+    parent_group.add_argument('-af','--Analysis_Firmware','-fa', action='store_true',help="Start Firmware_Analysis Module")
+    parent_group.add_argument('-an','--Analysis_Network','-na',action='store_true',help="Start Network_Analysis Module")
+
+    return parser.parse_args()
+
+# Core of ISEEU_Interface.py
+def Interface_Execute(args):
     try:
-        print("Interface_Execute")
+        if args.Network is True:
+            ISEEU_Scanner.Port_Scan()
+        elif args.Firmware is not None:
+            ISEEU_Scanner.Firmware_Scan()
+        elif args.Analysis_Firmware is True:
+            ISEEU_Analyst.Firmware_Analysis()
+        elif args.Analysis_Network is True:
+            ISEEU_Analyst.Packet_Analysis()
+        else:
+            print("Wrong Input")
+        print(args)
     except OSError as err:
         print("OS error: {0}".format(err))
     except ValueError:
@@ -29,3 +43,7 @@ def Interface_Execute():
     except:
         print("Unexpected error:", sys.exc_info()[0])
         raise
+
+if __name__ == "__main__":
+    args = Get_arg()
+    Interface_Execute(args)
