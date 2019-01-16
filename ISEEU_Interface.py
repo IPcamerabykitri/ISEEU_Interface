@@ -28,7 +28,7 @@ def Interface_Execute(args):
         if args.Network is True:
             ISEEU_Scanner.Port_Scan()
         elif args.Firmware is not None:
-            ISEEU_Scanner.Firmware_Scan()
+            ISEEU_Scanner.Firmware_Scan(args.Firmware)
         elif args.Analysis_Firmware is True:
             ISEEU_Analyst.Firmware_Analysis()
         elif args.Analysis_Network is True:
