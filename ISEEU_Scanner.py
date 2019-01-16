@@ -1,4 +1,7 @@
-#Scanner 모듈을 모아놓은 python 파일.
+# Scanning Module
+import os
+import sys
+from Hardware_Scan_Module import firmware_check
 
 def Port_Scan():
     print("Port_Scan!")
@@ -18,5 +21,5 @@ def Packet_Scan():
 def Backdoor_Scan():
     print("Backdoor_SCAN!")
 
-def Firmware_Scan():
-    print("Firmware_SCAN!")
+def Firmware_Scan(Path):
+    firmware_check.Check_boot_sequence(Path)
