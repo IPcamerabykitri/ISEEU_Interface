@@ -14,10 +14,11 @@ def Get_arg():
     network_parse.add_argument('-s', '--SSH', type=str, help="test ssh by input ip")
     network_parse.add_argument('-e','--Telnet',type=str, help="test telnet by input ip")
     network_parse.add_argument('-t', '--HTTP', type=str, help="test http by input ip")
+    network_parse.add_argument('-f','--FTP',type=str, help="test ftp by input ip")
     network_parse.add_argument('-p','--Packet',type=str, help="Sniff Packet of input network interface")
-
-    parent_group.add_argument('-f','--Firmware', type=str,metavar="rootfs_PATH" , help="Start Firmware Module")
-    parent_group.add_argument('-af','--Analysis_Firmware','-fa', action='store_true',help="Start Firmware_Analysis Module")
+    
+    parent_group.add_argument('-w','--Firmware', type=str,metavar="rootfs_PATH" , help="Start Firmware Module")
+    parent_group.add_argument('-aw','--Analysis_Firmware','-wa', action='store_true',help="Start Firmware_Analysis Module")
     parent_group.add_argument('-an','--Analysis_Network','-na',action='store_true',help="Start Network_Analysis Module")
 
     return parser.parse_args()
